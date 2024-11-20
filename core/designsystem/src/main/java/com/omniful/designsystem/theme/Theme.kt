@@ -29,6 +29,13 @@ data class DarkColors(
     override val surface: Color = Color.Black
 ):OMFColors
 
+data class CustomColors(
+    override val primary: Color = Purple30,
+    override val secondary: Color = Purple80,
+    override val background: Color = Color.Blue,
+    override val surface: Color = Color.Blue
+):OMFColors
+
 
 
 

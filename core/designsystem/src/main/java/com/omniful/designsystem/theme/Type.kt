@@ -13,15 +13,6 @@ interface OMFTypography{
     val caption: TextStyle
 }
 
-
-data class DefaultTypography(
-    override val heading: TextStyle=TextStyle.Default,
-    override val body: TextStyle=TextStyle.Default,
-    override val caption: TextStyle =TextStyle.Default
-) : OMFTypography{
-
-}
-
 data class LightTypography(
     override val heading: TextStyle =TextStyle(
         fontSize = 24.sp,

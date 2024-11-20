@@ -12,19 +12,25 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color.Companion.Unspecified
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import coil3.compose.rememberAsyncImagePainter
+import com.omniful.designsystem.theme.CustomColors
+import com.omniful.designsystem.theme.DarkColors
 import com.omniful.designsystem.theme.LocalOMFColors
+import com.omniful.designsystem.theme.OMFTypography
 import com.omniful.designsystem.theme.OmnifulTheme
+import com.omniful.designsystem.theme.ThemeManager
 import com.omniful.network.retrofit.RetrofitOmnifulNetwork
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -57,6 +63,10 @@ class MainActivity : ComponentActivity() {
                 val colors = LocalOMFColors.current
 
 
+                LaunchedEffect(Unit) {
+                    delay(2000)
+                    ThemeManager.setCustomColors(CustomColors())
+                }
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
