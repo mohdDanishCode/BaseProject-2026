@@ -5,47 +5,44 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.TextStyle
 
-data class OMFColors(
-    val primary: Color,
-    val secondary: Color,
-    val background: Color,
+interface OMFColors {
+    val primary: Color
+    val secondary: Color
+    val background: Color
     val surface: Color
-)
-
-
-
-val LocalOMFColors = staticCompositionLocalOf {
-    OMFColors(
-        primary = Color.Unspecified,
-        secondary = Color.Unspecified,
-        background = Color.Unspecified,
-        surface = Color.Unspecified
-    )
 }
 
-val LocalOMFTypography = staticCompositionLocalOf {
-    OMFTypography(
-        heading = TextStyle.Default,
-        body = TextStyle.Default,
-        caption = TextStyle.Default
-    )
+data class LightColors(
+    override val primary: Color = Purple30,
+    override val secondary: Color = Purple80,
+    override val background: Color = White100,
+    override val surface: Color = White100
+):OMFColors{
+
 }
 
-val LightColors = OMFColors(
-    primary = Purple30,
-    secondary = Purple80,
-    background = White100,
-    surface = White100
-)
+data class DarkColors(
+    override val primary: Color = Purple30,
+    override val secondary: Color = Purple80,
+    override val background: Color = Color.Black,
+    override val surface: Color = Color.Black
+):OMFColors
 
-val DarkColors = OMFColors(
-    primary = Purple30,
-    secondary = Purple80,
-    background = Color.Black,
-    surface = Color.Black
-)
+
+
+
+val LocalOMFColors = staticCompositionLocalOf<OMFColors> {
+    error("No Color provided")
+}
+
+
+
+val LocalTypography = staticCompositionLocalOf<OMFTypography> {
+    error("No Typography provided")
+}
+
+
 
 @Composable
 fun OmnifulTheme(
@@ -53,18 +50,17 @@ fun OmnifulTheme(
     content: @Composable () -> Unit
 ) {
 
-    val colors = if (darkTheme) DarkColors else LightColors
-    val configuredColorState = ThemeManager.customColors.value?.copy(
-        primary = colors.primary,
-        secondary = colors.secondary,
-        background = colors.background,
-        surface = colors.surface
-    ) ?: colors
-    val typography = if (darkTheme) DarkTypography else LightTypography
+    val colors = if (darkTheme) DarkColors() else LightColors()
+    val typography = if (darkTheme) DarkTypography() else LightTypography()
+
+    val configuredColorState = ThemeManager.customColors.value ?: colors
+
+    val configuredTypographyState = ThemeManager.customTypography.value ?: typography
+
 
     CompositionLocalProvider(
         LocalOMFColors provides configuredColorState,
-        LocalOMFTypography provides typography
+        LocalTypography provides configuredTypographyState
     ) {
         content()
     }

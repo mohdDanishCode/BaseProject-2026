@@ -5,44 +5,59 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 
-data class OMFTypography(
-    val heading: TextStyle,
-    val body: TextStyle,
-    val caption: TextStyle
-)
 
-val LightTypography = OMFTypography(
-    heading = TextStyle(
+
+interface OMFTypography{
+    val heading: TextStyle
+    val body: TextStyle
+    val caption: TextStyle
+}
+
+
+data class DefaultTypography(
+    override val heading: TextStyle=TextStyle.Default,
+    override val body: TextStyle=TextStyle.Default,
+    override val caption: TextStyle =TextStyle.Default
+) : OMFTypography{
+
+}
+
+data class LightTypography(
+    override val heading: TextStyle =TextStyle(
         fontSize = 24.sp,
         fontWeight = FontWeight.Bold,
         color = Color.Black
     ),
-    body = TextStyle(
+    override val body: TextStyle =TextStyle(
         fontSize = 16.sp,
         fontWeight = FontWeight.Normal,
         color = Color.DarkGray
     ),
-    caption = TextStyle(
+    override val caption: TextStyle=TextStyle(
         fontSize = 12.sp,
         fontWeight = FontWeight.Light,
         color = Color.Gray
     )
-)
+): OMFTypography
 
-val DarkTypography = OMFTypography(
-    heading = TextStyle(
+
+
+
+
+data class DarkTypography(
+    override val heading: TextStyle =TextStyle(
         fontSize = 24.sp,
         fontWeight = FontWeight.Bold,
         color = Color.White
     ),
-    body = TextStyle(
+    override val body: TextStyle  = TextStyle(
         fontSize = 16.sp,
         fontWeight = FontWeight.Normal,
         color = Color.LightGray
     ),
-    caption = TextStyle(
+    override val caption: TextStyle=TextStyle(
         fontSize = 12.sp,
         fontWeight = FontWeight.Light,
         color = Color.Gray
     )
-)
+): OMFTypography

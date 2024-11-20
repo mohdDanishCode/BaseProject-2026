@@ -72,13 +72,13 @@ class MainActivity : ComponentActivity() {
                         model = "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Rotating_earth_%28large%29.gif/200px-Rotating_earth_%28large%29.gif"
                     )
 
-                    Image(
-                        modifier = Modifier
-                            .fillMaxSize(),
-                        contentScale = ContentScale.Crop,
-                        painter = imageLoader,
-                        contentDescription = null
-                    )
+//                    Image(
+//                        modifier = Modifier
+//                            .fillMaxSize(),
+//                        contentScale = ContentScale.Crop,
+//                        painter = imageLoader,
+//                        contentDescription = null
+//                    )
                 }
             }
         }

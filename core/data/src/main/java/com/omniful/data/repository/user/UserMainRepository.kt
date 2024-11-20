@@ -3,10 +3,13 @@ package com.omniful.data.repository.user
 import javax.inject.Inject
 
 class UserMainRepository @Inject constructor(
-    private val handlers: Set<@JvmSuppressWildcards UserRepository>
+    private val userRepositoryChain: UserRepositoryChain
 ) {
+    private var userRepository: UserRepository = userRepositoryChain.getRepository()
+
+
     fun getName(): String? {
-        return handlers.firstNotNullOfOrNull { it.getName() }
+        return userRepository.getName()
     }
 
 }

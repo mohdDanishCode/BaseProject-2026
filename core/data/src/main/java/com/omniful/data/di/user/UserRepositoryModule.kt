@@ -14,15 +14,12 @@ import dagger.multibindings.IntoSet
 @InstallIn(SingletonComponent::class)
 abstract class  UserRepositoryModule {
     @Binds
-    @IntoSet
     internal abstract  fun bindUserCacheRepository(repo: UserCacheRepository): UserRepository
 
     @Binds
-    @IntoSet
     internal abstract  fun bindUserDataRepository(repo: UserDataRepository): UserRepository
 
     @Binds
-    @IntoSet
     internal abstract  fun bindUserNetworkRepository(repo: UserNetworkRepository): UserRepository
 
 }

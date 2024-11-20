@@ -40,6 +40,11 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     api(project(":core:common"))
+    api(project(":core:database"))
+    api(project(":core:datastore"))
+    api(project(":core:network"))
+
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
