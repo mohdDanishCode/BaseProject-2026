@@ -21,7 +21,7 @@ interface OmnifulNetworkApi {
 
 
 
-@Singleton
+
 class RetrofitOmnifulNetwork @Inject constructor(
     private val networkJson: Json,
     private val okhttpCallFactory: dagger.Lazy<Call.Factory>
@@ -39,5 +39,35 @@ class RetrofitOmnifulNetwork @Inject constructor(
             )
             .build()
             .create(OmnifulNetworkApi::class.java)
+    }
+}
+
+@Singleton
+class OmnifulNetworkFactory @Inject constructor(
+    private val networkJson: Json,
+    private val okhttpCallFactory: dagger.Lazy<Call.Factory>
+) {
+    private val cache = mutableMapOf<String, RetrofitOmnifulNetwork>()
+
+    fun getNetworkForMerchant(merchant: String): RetrofitOmnifulNetwork {
+        return cache.getOrPut(merchant) {
+            val baseUrl = getBaseUrlForMerchant(merchant) // You need to define this logic.
+            createNetwork(baseUrl)
+        }
+    }
+
+    private fun createNetwork(baseUrl: String): RetrofitOmnifulNetwork {
+        val network = RetrofitOmnifulNetwork(networkJson, okhttpCallFactory)
+        network.initialize(baseUrl)
+        return network
+    }
+
+    private fun getBaseUrlForMerchant(merchant: String): String {
+        // Example logic for merchant-specific base URLs.
+        return when (merchant) {
+            "merchant1" -> "https://api.merchant1.com/"
+            "merchant2" -> "https://api.merchant2.com/"
+            else -> throw IllegalArgumentException("Unknown merchant: $merchant")
+        }
     }
 }
