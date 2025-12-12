@@ -21,7 +21,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Omniful Base Project"
+rootProject.name = "Base Project 2026"
 include(":app")
 include(":core:common")
 include(":core:data")
