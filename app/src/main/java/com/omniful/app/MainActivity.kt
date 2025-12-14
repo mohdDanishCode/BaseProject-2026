@@ -24,7 +24,9 @@ import com.omniful.designsystem.theme.ButtonSize
 import com.omniful.designsystem.theme.CustomColors
 import com.omniful.designsystem.theme.DarkColors
 import com.omniful.designsystem.theme.GhostButton
+import com.omniful.designsystem.theme.InputState
 import com.omniful.designsystem.theme.LocalOMFColors
+import com.omniful.designsystem.theme.OMFTextInput
 import com.omniful.designsystem.theme.OMFTypography
 import com.omniful.designsystem.theme.OmnifulTheme
 import com.omniful.designsystem.theme.PrimaryButton
@@ -89,20 +91,13 @@ class MainActivity : ComponentActivity() {
                         model = "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Rotating_earth_%28large%29.gif/200px-Rotating_earth_%28large%29.gif"
                     )
 
-                    GhostButton(
-                        label = "Click Me",
-                        size = ButtonSize.L,
-                        onClick = {
-
-                        },
-                        modifier = Modifier,
-                        enabled = true,
-                        leftIcon = {
-
-                        },
-                        rightIcon = {
-
-                        }
+                    OMFTextInput(
+                        value = "",
+                        onValueChange = {},
+                        label = "your name",
+                        placeholder = "Placeholder",
+                        state = InputState.Success,
+                        caption = "Looks good"
                     )
 
 //                    Image(
