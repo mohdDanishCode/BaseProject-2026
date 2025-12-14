@@ -53,6 +53,9 @@ val LocalShadows = staticCompositionLocalOf<OMFShadows> {
     error("No shadow provided")
 }
 
+val LocalOMFSize = staticCompositionLocalOf<OMFSize> {
+    error("No OMFSize provided")
+}
 
 
 @Composable
@@ -74,12 +77,16 @@ fun OmnifulTheme(
     // BRAND shadows → generated from primary
     val brandShadows = BrandShadows(primary = configuredColorState.primary)
 
+    val configuredSize = DefaultOMFSize
+
+
     val shadows = object : OMFShadows {
         override val theme = themeShadows
         override val brand = brandShadows
     }
 
     CompositionLocalProvider(
+        LocalOMFSize provides configuredSize,
         LocalOMFColors provides configuredColorState,
         LocalTypography provides configuredTypographyState,
         LocalShadows provides shadows
