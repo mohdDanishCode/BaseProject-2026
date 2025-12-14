@@ -49,6 +49,10 @@ val LocalTypography = staticCompositionLocalOf<OMFTypography> {
     error("No Typography provided")
 }
 
+val LocalShadows = staticCompositionLocalOf<OMFShadows> {
+    error("No shadow provided")
+}
+
 
 
 @Composable
@@ -64,10 +68,21 @@ fun OmnifulTheme(
 
     val configuredTypographyState = ThemeManager.customTypography.value ?: typography
 
+    // THEME shadows → light or dark
+    val themeShadows = if (darkTheme) DarkShadows else LightShadows
+
+    // BRAND shadows → generated from primary
+    val brandShadows = BrandShadows(primary = configuredColorState.primary)
+
+    val shadows = object : OMFShadows {
+        override val theme = themeShadows
+        override val brand = brandShadows
+    }
 
     CompositionLocalProvider(
         LocalOMFColors provides configuredColorState,
-        LocalTypography provides configuredTypographyState
+        LocalTypography provides configuredTypographyState,
+        LocalShadows provides shadows
     ) {
         content()
     }
