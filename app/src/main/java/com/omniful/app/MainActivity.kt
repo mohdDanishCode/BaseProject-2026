@@ -13,17 +13,23 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color.Companion.Unspecified
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import coil3.compose.rememberAsyncImagePainter
+import com.omniful.designsystem.theme.ButtonSize
 import com.omniful.designsystem.theme.CustomColors
 import com.omniful.designsystem.theme.DarkColors
+import com.omniful.designsystem.theme.GhostButton
 import com.omniful.designsystem.theme.LocalOMFColors
 import com.omniful.designsystem.theme.OMFTypography
 import com.omniful.designsystem.theme.OmnifulTheme
+import com.omniful.designsystem.theme.PrimaryButton
+import com.omniful.designsystem.theme.SecondaryButton
+import com.omniful.designsystem.theme.TertiaryButton
 import com.omniful.designsystem.theme.ThemeManager
 import com.omniful.network.retrofit.RetrofitOmnifulNetwork
 import dagger.hilt.android.AndroidEntryPoint
@@ -70,16 +76,33 @@ class MainActivity : ComponentActivity() {
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
-                        .background(colors.background)
+                        .background(colors.background),
+                    contentAlignment = Alignment.Center
                 ) {
-                    Greeting(
-                        name = "Danish",
-                        modifier = Modifier
-                    )
+//                    Greeting(
+//                        name = "Danish",
+//                        modifier = Modifier
+//                    )
                     val localOMFColors = LocalOMFColors.current
 
                     val imageLoader = rememberAsyncImagePainter(
                         model = "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Rotating_earth_%28large%29.gif/200px-Rotating_earth_%28large%29.gif"
+                    )
+
+                    GhostButton(
+                        label = "Click Me",
+                        size = ButtonSize.L,
+                        onClick = {
+
+                        },
+                        modifier = Modifier,
+                        enabled = true,
+                        leftIcon = {
+
+                        },
+                        rightIcon = {
+
+                        }
                     )
 
 //                    Image(
