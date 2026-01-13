@@ -43,6 +43,7 @@ dependencies {
     api(project(":core:database"))
     api(project(":core:datastore"))
     api(project(":core:network"))
+    implementation(libs.androidx.compose.runtime)
 
 
     testImplementation(libs.junit)
@@ -52,4 +53,12 @@ dependencies {
     //Hilt
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler) // KAPT for Hilt
+
+    api("com.google.android.libraries.places:places:3.5.0")
+    api("com.google.maps:google-maps-services:2.2.0")
+    api("com.google.android.gms:play-services-location:21.3.0")
+    implementation("com.jakewharton.timber:timber:5.0.1")
+
+
+
 }

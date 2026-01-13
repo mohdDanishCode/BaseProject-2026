@@ -4,6 +4,13 @@ import androidx.compose.ui.graphics.Color
 
 val White100 = Color(0xFFFFFFFF)
 
+val Black100 = Color(0xFF000000)
+
+val Transparent = Color(0xFF00000000 )
+val Blank = Color(0xffFAFAFA)
+
+val DividerColor = Color(0x101C1C1C1A )
+
 val Orange25  = Color(0xFFFFFAF1)
 val Orange50  = Color(0xFFFFF8EB)
 val Orange100 = Color(0xFFFEEBC7)

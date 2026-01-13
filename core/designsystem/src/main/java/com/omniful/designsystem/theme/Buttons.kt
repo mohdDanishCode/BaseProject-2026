@@ -1,23 +1,32 @@
 package com.omniful.designsystem.theme
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.omniful.designsystem.R
+import com.omniful.designsystem.components.onClickWithHaptics
 
 enum class ButtonSize {
     XS, S, M, L
@@ -30,6 +39,8 @@ fun PrimaryButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
+    buttonColor: Color?=null,
+    isLoading:Boolean = true,
     leftIcon: (@Composable ((Dp) -> Unit))? = null,
     rightIcon: (@Composable ((Dp) -> Unit))? = null
 ) {
@@ -82,7 +93,7 @@ fun PrimaryButton(
             .height(height)
             .clip(RoundedCornerShape(cornerRadius))
             .background(
-                color = if (enabled) colors.primary else colors.primary.copy(alpha = 0.5f)
+                color = if (enabled) buttonColor?:colors.primary else buttonColor?.copy(alpha = 0.5f)?:colors.primary.copy(alpha = 0.5f)
             )
             .clickable(enabled = enabled, onClick = onClick)
             .padding(horizontal = horizontalPadding),
@@ -93,15 +104,24 @@ fun PrimaryButton(
             horizontalArrangement = Arrangement.spacedBy(spacing.spacing2)
         ) {
 
-            leftIcon?.invoke(iconSize)
+            if (isLoading) {
+                CircularProgressIndicator(
+                    modifier = Modifier.size(20.dp),
+                    strokeWidth = 2.dp,
+                    color = Color.White
+                )
+            }
+            else{
+                leftIcon?.invoke(iconSize)
 
-            Text(
-                text = label,
-                style = textStyle,
-                color = Color.White
-            )
+                Text(
+                    text = label,
+                    style = textStyle,
+                    color = Color.White
+                )
 
-            rightIcon?.invoke(iconSize)
+                rightIcon?.invoke(iconSize)
+            }
         }
     }
 }
@@ -113,6 +133,7 @@ fun SecondaryButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
+    buttonColor: Color?=null,
     leftIcon: (@Composable ((Dp) -> Unit))? = null,
     rightIcon: (@Composable ((Dp) -> Unit))? = null
 ) {
@@ -168,6 +189,7 @@ fun SecondaryButton(
                 color = if (enabled) colors.primary else colors.primary.copy(alpha = 0.5f),
                 shape = RoundedCornerShape(cornerRadius)
             )
+            .background(buttonColor?:Transparent)
             .clickable(enabled = enabled, onClick = onClick)
             .padding(horizontal = horizontalPadding),
         contentAlignment = Alignment.Center
@@ -179,11 +201,15 @@ fun SecondaryButton(
 
             leftIcon?.invoke(iconSize)
 
-            Text(
-                text = label,
-                style = textStyle,
-                color = if (enabled) Color.Black else Color.Black.copy(alpha = 0.5f)
-            )
+            if(label.isNotEmpty()){
+                Text(
+                    text = label,
+                    style = textStyle,
+                    color = if (enabled) Color.Black else Color.Black.copy(alpha = 0.5f)
+                )
+            }
+
+
 
             rightIcon?.invoke(iconSize)
         }
@@ -197,6 +223,7 @@ fun TertiaryButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
+    buttonColor: Color?=null,
     leftIcon: (@Composable ((Dp) -> Unit))? = null,
     rightIcon: (@Composable ((Dp) -> Unit))? = null
 ) {
@@ -252,6 +279,7 @@ fun TertiaryButton(
                 color = if (enabled) Color(0x05000000) else Color(0x05000000).copy(alpha = 0.5f),
                 shape = RoundedCornerShape(cornerRadius)
             )
+            .background(buttonColor?:Transparent)
             .clickable(enabled = enabled, onClick = onClick)
             .padding(horizontal = horizontalPadding),
         contentAlignment = Alignment.Center
@@ -271,6 +299,24 @@ fun TertiaryButton(
 
             rightIcon?.invoke(iconSize)
         }
+    }
+}
+
+@Composable
+fun BackButton(modifier: Modifier,customText :String?=null, onBackClick: () -> Unit){
+    val sizeSystem  = LocalOMFSize.current
+    val color = LocalOMFColors.current
+    val typography = LocalTypography.current
+
+    Row(
+        modifier = modifier
+            .onClickWithHaptics {
+                onBackClick()
+            }
+            .padding(sizeSystem.spacing.spacing4),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Image(modifier = Modifier.size(sizeSystem.spacing.spacing6),painter = painterResource(R.drawable.back), contentDescription = null)
     }
 }
 

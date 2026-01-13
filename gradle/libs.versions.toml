@@ -1,5 +1,5 @@
 [versions]
-agp = "8.7.2"
+agp = "8.9.1"
 coil = "3.0.3"
 common = "31.7.2"
 composeGradlePlugin = "1.5.1"
@@ -29,6 +29,7 @@ retrofit2KotlinxSerializationConverter = "1.0.0"
 roomCompiler = "2.5.1"
 roomRuntime = "2.6.1"
 symbolProcessingGradlePlugin = "2.0.21-1.0.27"
+runtime = "1.10.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -73,6 +74,7 @@ perf-plugin = { module = "com.google.firebase:perf-plugin", version.ref = "perfP
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 retrofit2-kotlinx-serialization-converter = { module = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter", version.ref = "retrofit2KotlinxSerializationConverter" }
 symbol-processing-gradle-plugin = { module = "com.google.devtools.ksp:symbol-processing-gradle-plugin", version.ref = "symbolProcessingGradlePlugin" }
+androidx-compose-runtime = { group = "androidx.compose.runtime", name = "runtime", version.ref = "runtime" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

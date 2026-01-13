@@ -14,7 +14,7 @@ interface OMFColors {
 }
 
 data class LightColors(
-    override val primary: Color = Orange100,
+    override val primary: Color = Orange900,
     override val secondary: Color = Blue100,
     override val background: Color = White100,
     override val surface: Color = White100
@@ -23,14 +23,14 @@ data class LightColors(
 }
 
 data class DarkColors(
-    override val primary: Color = Orange100,
+    override val primary: Color = Orange900,
     override val secondary: Color = Blue100,
     override val background: Color = Color.Black,
     override val surface: Color = Color.Black
 ):OMFColors
 
 data class CustomColors(
-    override val primary: Color = Orange100,
+    override val primary: Color = Orange900,
     override val secondary: Color = Blue100,
     override val background: Color = Color.Blue,
     override val surface: Color = Color.Blue

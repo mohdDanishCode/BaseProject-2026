@@ -9,6 +9,13 @@ interface OMFCornerRadius {
     val radius2: Dp
     val radius3: Dp
     val radius4: Dp
+
+    val radius5: Dp
+    val radius6: Dp
+    val radius7: Dp
+    val radius8: Dp
+
+    val radius9: Dp
     val radiusFull: Dp
 }
 
@@ -31,6 +38,12 @@ object DefaultCornerRadius : OMFCornerRadius {
     override val radius2 = 8.dp
     override val radius3 = 12.dp
     override val radius4 = 16.dp
+    override val radius5 = 20.dp
+    override val radius6 = 24.dp
+    override val radius7 = 28.dp
+    override val radius8 = 32.dp
+    override val radius9 = 36.dp
+
     override val radiusFull = 100.dp   // for pill / max rounding
 }
 

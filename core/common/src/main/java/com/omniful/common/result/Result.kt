@@ -30,3 +30,10 @@ sealed interface Result<out T> {
 fun <T> Flow<T>.asResult(): Flow<Result<T>> = map<T, Result<T>> { Result.Success(it) }
     .onStart { emit(Result.Loading) }
     .catch { emit(Result.Error(it)) }
+
+
+sealed class ViewState<out R> {
+    data object Loading : ViewState<Nothing>()
+    data class Success<out T>(val data: T?) : ViewState<T>()
+    data class Error(val message: String?) : ViewState<Nothing>()
+}
