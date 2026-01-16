@@ -8,14 +8,24 @@ import androidx.navigation.compose.composable
 import com.omniful.app.presentation.dashboard.DashboardScreen
 import com.omniful.app.presentation.login.LoginScreen
 import com.omniful.app.presentation.login.LoginViewModel
+import com.omniful.app.presentation.notes.NoteEntryScreen
+import com.omniful.app.presentation.notes.NotesHomeScreen
 import com.omniful.app.presentation.otp.OtpScreen
 import com.omniful.app.presentation.splash.SplashScreen
+import com.omniful.database.model.NoteEntity
 
 sealed class ScreenRoute(val route: String) {
 
     object Splash : ScreenRoute("splash")
     object Login : ScreenRoute("login")
     object Otp : ScreenRoute("otp")
+
+
+    object NotesHome : ScreenRoute("notes_home")
+
+
+    object NotesEntry : ScreenRoute("notes_entry")
+
 
     object Dashboard : ScreenRoute("dashboard")
 }
@@ -27,8 +37,34 @@ fun NavGraph(navController: NavHostController) {
 
     NavHost(
         navController = navController,
-        startDestination = ScreenRoute.Splash.route
+        startDestination = ScreenRoute.NotesHome.route
     ) {
+
+        composable(ScreenRoute.NotesHome.route) {
+            NotesHomeScreen(
+                onAdd = { navController.navigate(ScreenRoute.NotesEntry.route) },
+                onNoteClick = {
+                    navController.currentBackStackEntry
+                        ?.savedStateHandle
+                        ?.set("note", it)
+                    navController.navigate(ScreenRoute.NotesEntry.route)
+                }
+            )
+        }
+
+
+        composable(ScreenRoute.NotesEntry.route) {
+            val note =
+                navController.previousBackStackEntry
+                    ?.savedStateHandle
+                    ?.get<NoteEntity>("note")
+
+            NoteEntryScreen(
+                note = note,
+                onBack = { navController.popBackStack() }
+            )
+        }
+
 
         composable(ScreenRoute.Login.route) {
             val vm: LoginViewModel = hiltViewModel()
