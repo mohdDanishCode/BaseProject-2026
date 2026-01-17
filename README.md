@@ -1,22 +1,81 @@
-### Features Implemented
+# 🎬 Movie Demo App
 
-- Clean Architecture with multi-module setup
-- Offline-first approach with Room as the single source of truth
-- Trending movies fetched from TMDB and synced to local database
-- Movie list and movie detail screens built with Jetpack Compose
-- Local search powered by database queries (works offline)
-- Paging 3 integration for efficient data loading
-- Pull-to-refresh support
-- Image loading with disk and memory caching
-- Centralized design system for colors, typography, spacing, and components
-- Separate error handling using sealed error classes
-- Proper loading, error (with retry), and empty states
-- Keyboard automatically hides on scroll and swipe interactions
-- Lazy initialization where applicable
+A modern Android application built with **Kotlin** and **Jetpack Compose** that demonstrates trending movie discovery using an **offline-first architecture**, **clean architecture principles**, and a **polished production-ready UI**.
 
-### Setup
+---
 
-Add your TMDB API key in `gradle.properties`:
+## 📹 App Demo
+
+(Add your demo video link here)
+
+https://github.com/user-attachments/assets/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
+
+---
+
+## ✨ Features
+
+- Browse trending movies  
+- Movie detail screen  
+- Offline-first architecture (local database as source of truth)  
+- Local movie search (works completely offline)  
+- Pull-to-refresh support  
+- Paging 3 for efficient data loading  
+- Image caching (memory & disk)  
+- Centralized design system  
+- Structured error handling  
+- Loading, error (with retry), and empty states  
+- Keyboard auto-hide on scroll and swipe  
+- Lazy initialization for better performance  
+
+---
+
+## 🧱 Architecture
+
+The app follows **Clean Architecture** with a **multi-module setup**:
+
+### Layers
+
+- **Data layer**
+  - Remote API
+  - Local database
+  - Paging & RemoteMediator
+  - Mappers
+
+- **Domain layer**
+  - Business logic
+  - Use cases
+
+- **UI layer**
+  - Jetpack Compose screens
+  - ViewModel & State management
+
+### Data Flow
+
+> UI observes data **only from the database**, ensuring full offline support.
+
+---
+
+## 🛠 Tech Stack
+
+- Kotlin  
+- Jetpack Compose  
+- Compose Navigation  
+- Retrofit + OkHttp  
+- Room  
+- Paging 3  
+- Coil  
+- Hilt  
+- StateFlow & ViewModel  
+
+---
+
+## ⚙️ Setup
+
+1. Clone the repository  
+2. Generate a TMDB API key  
+3. Add the key to `gradle.properties`:
 
 ```properties
 TMDB_API_KEY=your_api_key_here
+
+
