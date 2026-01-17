@@ -1,4 +1,4 @@
-package com.omniful.app.presentation.movies
+package com.omniful.app.presentation.movieDetail
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
@@ -27,8 +26,6 @@ import com.omniful.designsystem.theme.BodyType
 import com.omniful.designsystem.theme.HeadingType
 import com.omniful.designsystem.theme.LocalOMFSize
 import com.omniful.designsystem.theme.LocalTypography
-import com.omniful.designsystem.theme.OMFTypography
-import com.omniful.designsystem.theme.OmnifulTheme
 
 @Composable
 fun MovieDetailScreen(

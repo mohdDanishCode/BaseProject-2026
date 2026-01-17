@@ -1,4 +1,4 @@
-package com.omniful.app.presentation.movies
+package com.omniful.app.presentation.movieDetail
 
 
 import androidx.lifecycle.ViewModel

@@ -5,8 +5,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.omniful.app.presentation.movies.MovieDetailScreen
-import com.omniful.app.presentation.movies.MovieDetailViewModel
+import com.omniful.app.presentation.movieDetail.MovieDetailScreen
+import com.omniful.app.presentation.movieDetail.MovieDetailViewModel
 import com.omniful.app.presentation.movies.MovieListScreen
 
 sealed class ScreenRoute(val route: String) {
