@@ -3,6 +3,7 @@ package com.omniful.database.di
 import android.content.Context
 import androidx.room.Room
 import com.omniful.database.OmnifulDatabase
+import com.omniful.database.dao.MovieDao
 import com.omniful.database.dao.NoteDao
 import com.omniful.database.dao.UserDao
 import dagger.Module
@@ -35,5 +36,10 @@ object OmnifulDatabaseModule {
     @Provides
     fun provideNotesDao(database: OmnifulDatabase): NoteDao {
         return database.getNoteDao()
+    }
+
+    @Provides
+    fun provideMovieDao(database: OmnifulDatabase): MovieDao {
+        return database.getMovieDao()
     }
 }

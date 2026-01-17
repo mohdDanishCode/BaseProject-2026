@@ -22,9 +22,10 @@ import coil3.ImageLoader
 import coil3.gif.AnimatedImageDecoder
 import coil3.gif.GifDecoder
 import coil3.network.okhttp.OkHttpNetworkFetcherFactory
-import coil3.network.okhttp.asNetworkClient
 import coil3.svg.SvgDecoder
-import com.omniful.network.retrofit.RetrofitOmnifulNetwork
+import com.omniful.network.BuildConfig
+import com.omniful.network.retrofit.ApiKeyInterceptor
+import com.omniful.network.retrofit.ApiProvider
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -48,17 +49,36 @@ internal object NetworkModule {
 
     @Provides
     @Singleton
-    fun okHttpCallFactory(): Call.Factory = OkHttpClient.Builder()
-        .addInterceptor(
-            HttpLoggingInterceptor()
-                .apply {
-//                    if (BuildConfig.DEBUG) {
-//                        setLevel(HttpLoggingInterceptor.Level.BODY)
-//                    }
-                },
-        )
-        .build()
+    fun provideOkHttpClient(): OkHttpClient {
 
+        val loggingInterceptor = HttpLoggingInterceptor().apply {
+            level = HttpLoggingInterceptor.Level.BODY
+        }
+
+        val apiKeyInterceptor = ApiKeyInterceptor(
+            apiKey = BuildConfig.TMDB_API_KEY
+        )
+
+        return OkHttpClient.Builder()
+            .addInterceptor(apiKeyInterceptor)
+            .addInterceptor(loggingInterceptor)
+            .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideCallFactory(
+        okHttpClient: OkHttpClient
+    ): Call.Factory = okHttpClient
+
+
+    @Provides
+    @Singleton
+    fun provideOmnifulApiProvider(
+        json: Json,
+        okHttpClient: OkHttpClient
+    ): ApiProvider =
+        ApiProvider(json, okHttpClient)
 
     @Provides
     @Singleton
@@ -86,12 +106,4 @@ internal object NetworkModule {
         .build()
 
 
-    @Provides
-    @Singleton
-    fun provideRetrofitOmnifulNetwork(
-        networkJson: Json,
-        okhttpCallFactory: dagger.Lazy<Call.Factory>
-    ): RetrofitOmnifulNetwork {
-        return RetrofitOmnifulNetwork(networkJson, okhttpCallFactory)
-    }
 }

@@ -1,5 +1,6 @@
 package com.omniful.app
 
+import android.annotation.SuppressLint
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -23,7 +24,6 @@ import com.omniful.data.manager.language.LanguageUtil.setOrientation
 import com.omniful.data.manager.language.MyContextWrapper
 import com.omniful.designsystem.theme.LocalOMFColors
 import com.omniful.designsystem.theme.OmnifulTheme
-import com.omniful.network.retrofit.RetrofitOmnifulNetwork
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineExceptionHandler
 import timber.log.Timber
@@ -70,16 +70,15 @@ class MainActivity : ComponentActivity() {
         super.onDestroy()
     }
 
-    @Inject
-    lateinit var  retrofitOmnifulNetwork : RetrofitOmnifulNetwork
+
 
     val coroutineExceptionHandler = CoroutineExceptionHandler { coroutineContext, throwable ->  }
     private lateinit var appNavigator: AppNavigator
 
 
+    @SuppressLint("UnsafeIntentLaunch")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        retrofitOmnifulNetwork.initialize("https://api.restful-api.dev/")
 
         Timber.d("onCreate")
 

@@ -8,6 +8,9 @@ import androidx.navigation.compose.composable
 import com.omniful.app.presentation.dashboard.DashboardScreen
 import com.omniful.app.presentation.login.LoginScreen
 import com.omniful.app.presentation.login.LoginViewModel
+import com.omniful.app.presentation.movies.MovieDetailScreen
+import com.omniful.app.presentation.movies.MovieDetailViewModel
+import com.omniful.app.presentation.movies.MovieListScreen
 import com.omniful.app.presentation.notes.NoteEntryScreen
 import com.omniful.app.presentation.notes.NotesHomeScreen
 import com.omniful.app.presentation.otp.OtpScreen
@@ -26,6 +29,10 @@ sealed class ScreenRoute(val route: String) {
 
     object NotesEntry : ScreenRoute("notes_entry")
 
+    object MovieHome : ScreenRoute("movie_home")
+    object MovieDetail : ScreenRoute("movie_detail")
+
+
 
     object Dashboard : ScreenRoute("dashboard")
 }
@@ -37,8 +44,37 @@ fun NavGraph(navController: NavHostController) {
 
     NavHost(
         navController = navController,
-        startDestination = ScreenRoute.NotesHome.route
+        startDestination = ScreenRoute.MovieHome.route
     ) {
+
+
+        composable(ScreenRoute.MovieHome.route) {
+            MovieListScreen {
+                navController.currentBackStackEntry
+                    ?.savedStateHandle
+                    ?.set("movie-id", it)
+                navController.navigate(ScreenRoute.MovieDetail.route)
+            }
+        }
+
+        composable(ScreenRoute.MovieDetail.route) {
+
+            val movieId =
+                navController.previousBackStackEntry
+                    ?.savedStateHandle
+                    ?.get<Long>("movie-id")
+
+            movieId?.let {
+                val viewModel: MovieDetailViewModel = hiltViewModel()
+                viewModel.loadMovie(movieId)
+                MovieDetailScreen(
+                    viewModel = hiltViewModel(),
+                    onBackClick = { navController.popBackStack() }
+                )
+            }
+
+
+        }
 
         composable(ScreenRoute.NotesHome.route) {
             NotesHomeScreen(

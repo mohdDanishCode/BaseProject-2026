@@ -19,7 +19,7 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -32,6 +32,20 @@ android {
     }
     kotlinOptions {
         jvmTarget = "11"
+    }
+
+    defaultConfig {
+        val tmdbApiKey = project.findProperty("TMDB_API_KEY")?.toString()
+
+        buildConfigField(
+            "String",
+            "TMDB_API_KEY",
+            "\"${tmdbApiKey ?: ""}\""
+        )
+    }
+
+    buildFeatures {
+        buildConfig = true
     }
 }
 

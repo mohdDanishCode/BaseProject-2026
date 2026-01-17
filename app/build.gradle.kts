@@ -56,6 +56,7 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.androidx.paging.common)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
@@ -93,5 +94,8 @@ dependencies {
     implementation("androidx.compose.material:material-icons-extended")
     implementation("com.jakewharton.timber:timber:5.0.1")
     implementation("androidx.localbroadcastmanager:localbroadcastmanager:1.1.0")
+
+    implementation("androidx.paging:paging-runtime:3.3.6")
+    implementation("androidx.paging:paging-compose:3.3.6")
 
 }

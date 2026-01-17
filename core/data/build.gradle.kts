@@ -44,6 +44,7 @@ dependencies {
     api(project(":core:datastore"))
     api(project(":core:network"))
     implementation(libs.androidx.compose.runtime)
+    implementation(libs.androidx.paging.common)
 
 
     testImplementation(libs.junit)
@@ -60,5 +61,9 @@ dependencies {
     implementation("com.jakewharton.timber:timber:5.0.1")
 
 
+    implementation("androidx.room:room-runtime:2.6.1")
+    implementation("androidx.room:room-ktx:2.6.1")
+
+    implementation(libs.retrofit)
 
 }
