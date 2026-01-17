@@ -19,9 +19,13 @@ package com.omniful.network.di
 import android.content.Context
 import android.os.Build.VERSION.SDK_INT
 import coil3.ImageLoader
+import coil3.disk.DiskCache
+import coil3.disk.directory
 import coil3.gif.AnimatedImageDecoder
 import coil3.gif.GifDecoder
+import coil3.memory.MemoryCache
 import coil3.network.okhttp.OkHttpNetworkFetcherFactory
+import coil3.request.crossfade
 import coil3.svg.SvgDecoder
 import com.omniful.network.BuildConfig
 import com.omniful.network.retrofit.ApiKeyInterceptor
@@ -83,28 +87,41 @@ internal object NetworkModule {
     @Provides
     @Singleton
     fun imageLoader(
-        // We specifically request dagger.Lazy here, so that it's not instantiated from Dagger.
         okHttpCallFactory: dagger.Lazy<Call.Factory>,
         @ApplicationContext application: Context,
-    ): ImageLoader = ImageLoader.Builder(application)
-        .components {
-            add(OkHttpNetworkFetcherFactory(callFactory = {
-                okHttpCallFactory.get()
-            }))
-            add(SvgDecoder.Factory())
-            add(if (SDK_INT >= 28) {
-                AnimatedImageDecoder.Factory()
-            } else {
-                GifDecoder.Factory()
-            })
-        }
+    ): ImageLoader {
 
-        .apply {
-//            if (BuildConfig.DEBUG) {
-//                logger(DebugLogger())
-//            }
-        }
-        .build()
+        return ImageLoader.Builder(application)
+            .components {
+                add(OkHttpNetworkFetcherFactory(callFactory = {
+                    okHttpCallFactory.get()
+                }))
+                add(SvgDecoder.Factory())
+                add(
+                    if (SDK_INT >= 28) {
+                        AnimatedImageDecoder.Factory()
+                    } else {
+                        GifDecoder.Factory()
+                    }
+                )
+            }
+            .memoryCache {
+                MemoryCache.Builder()
+                    .maxSizePercent(application, 0.125) // 12.5% of app heap
+                    .build()
+            }
+
+            .diskCache {
+                DiskCache.Builder()
+                    .directory(application.cacheDir.resolve("image_cache"))
+                    .maxSizeBytes(512L * 1024 * 1024) // 512 MB
+                    .build()
+            }
+
+            .crossfade(true)
+            .build()
+    }
+
 
 
 }
