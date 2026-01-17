@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
+import com.omniful.designsystem.theme.Blank
 
 interface OMFColors {
     val primary: Color
@@ -14,24 +15,24 @@ interface OMFColors {
 }
 
 data class LightColors(
-    override val primary: Color = Orange900,
-    override val secondary: Color = Blue100,
-    override val background: Color = White100,
-    override val surface: Color = White100
+    override val primary: Color = Black100,
+    override val secondary: Color = Black100,
+    override val background: Color = Blank,
+    override val surface: Color = Blank
 ):OMFColors{
 
 }
 
 data class DarkColors(
-    override val primary: Color = Orange900,
-    override val secondary: Color = Blue100,
-    override val background: Color = Color.Black,
-    override val surface: Color = Color.Black
+    override val primary: Color = Black100,
+    override val secondary: Color = Black100,
+    override val background: Color = Blank,
+    override val surface: Color = Blank
 ):OMFColors
 
 data class CustomColors(
     override val primary: Color = Orange900,
-    override val secondary: Color = Blue100,
+    override val secondary: Color = Grey200,
     override val background: Color = Color.Blue,
     override val surface: Color = Color.Blue
 ):OMFColors

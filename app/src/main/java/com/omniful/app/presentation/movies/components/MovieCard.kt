@@ -15,12 +15,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import coil3.compose.AsyncImage
 import com.omniful.data.model.movies.MovieUiModel
+import com.omniful.designsystem.theme.Black100
 import com.omniful.designsystem.theme.BodyType
-import com.omniful.designsystem.theme.LocalOMFColors
 import com.omniful.designsystem.theme.LocalOMFSize
 import com.omniful.designsystem.theme.LocalShadows
 import com.omniful.designsystem.theme.LocalTypography
-import com.omniful.designsystem.theme.applyShadow
 
 @Composable
 fun MovieCard(
@@ -35,32 +34,27 @@ fun MovieCard(
     Column(
         modifier = modifier
             .fillMaxWidth()
-            .applyShadow(
-                style = shadows.theme.S02,
-                cornerRadius = size.radius.radius3
-            )
-            .background(
-                color = LocalOMFColors.current.surface,
-                shape = RoundedCornerShape(size.radius.radius3)
-            )
+
             .clickable(onClick = onClick)
-            .padding(size.spacing.spacing3)
+            .padding(bottom = size.spacing.spacing1)
     ) {
         AsyncImage(
             model = movie.posterUrl,
             contentDescription = movie.title,
             modifier = Modifier
                 .fillMaxWidth()
-                .aspectRatio(2f / 3f)
-                .clip(RoundedCornerShape(size.radius.radius3))
-                .background(LocalOMFColors.current.secondary.copy(alpha = 0.1f))
+                .aspectRatio(2f/3f)
+                .clip(RoundedCornerShape(size.radius.radius4))
+                .background(Black100.copy(alpha = 0.1f)),
+            contentScale = androidx.compose.ui.layout.ContentScale.Crop
+
         )
 
-        Spacer(modifier = Modifier.height(size.spacing.spacing2))
+        Spacer(modifier = Modifier.height(size.spacing.spacing3))
 
         Text(
             text = movie.title,
-            style = typography.body.styles[BodyType.B02]!!.medium,
+            style = typography.body.styles[BodyType.B01]!!.medium,
             maxLines = 2
         )
     }

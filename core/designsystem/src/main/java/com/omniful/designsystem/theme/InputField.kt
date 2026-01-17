@@ -27,6 +27,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.LightGray
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -50,22 +51,24 @@ enum class InputState {
 }
 
 @Composable
-fun PandaSearchInputField(
+fun SearchInputField(
+    value: String,
+    placeholder: String,
     modifier: Modifier = Modifier,
     onValueChange: (String) -> Unit
 
 ) {
-    var inputText by rememberSaveable { mutableStateOf("") }
+    var inputText by rememberSaveable { mutableStateOf(value) }
     val focusManager = LocalFocusManager.current
-
+    val spacing = LocalOMFSize.current.spacing
     OMFTextInput(
         value = inputText,
         onValueChange = {
             inputText = it
             onValueChange(it)
         },
-        placeholder = "Search for Country",
-        size = InputSize.M,
+        placeholder = placeholder,
+        size = InputSize.L,
         state = if (inputText.isEmpty())
             InputState.Default
         else
@@ -81,8 +84,8 @@ fun PandaSearchInputField(
             Icon(
                 painter = painterResource(id = R.drawable.search),
                 contentDescription = "Search",
-                tint = if (inputText.isNotEmpty()) Grey200 else Grey300,
-                modifier = Modifier.size(iconSize)
+                tint = if (inputText.isNotEmpty()) Grey100 else Grey200,
+                modifier = Modifier.size(spacing.spacing4)
             )
         },
         rightIcon = { iconSize ->
@@ -135,11 +138,11 @@ fun OMFTextInput(
 
     when (size) {
         InputSize.L -> {
-            height = 48.dp
+            height = 56.dp
             horizontalPadding = spacing.spacing3
             cornerRadius = radius.radius3
-            textStyle = typography.body.styles[BodyType.B01]!!.medium
-            iconSize = 24.dp
+            textStyle = typography.body.styles[BodyType.B01]!!.regular
+            iconSize = 16.dp
         }
         InputSize.M -> {
             height = 40.dp
@@ -212,7 +215,7 @@ fun OMFTextInput(
                         Text(
                             text = placeholder,
                             style = textStyle,
-                            color = Color.Gray
+                            color = Grey200
                         )
                     }
                     BasicTextField(

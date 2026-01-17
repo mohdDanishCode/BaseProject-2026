@@ -3,8 +3,11 @@ package com.omniful.app.presentation.movies
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -13,6 +16,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
@@ -20,8 +24,9 @@ import com.omniful.app.presentation.movies.components.EmptyState
 import com.omniful.app.presentation.movies.components.ErrorState
 import com.omniful.app.presentation.movies.components.LoadingState
 import com.omniful.app.presentation.movies.components.MovieCard
-import com.omniful.app.presentation.movies.components.MovieSearchBar
+import com.omniful.designsystem.R
 import com.omniful.designsystem.theme.LocalOMFSize
+import com.omniful.designsystem.theme.SearchInputField
 
 @Composable
 fun MovieListScreen(
@@ -36,10 +41,16 @@ fun MovieListScreen(
 
     Column(modifier = Modifier.fillMaxSize()) {
 
-        MovieSearchBar(
+        Spacer(modifier = Modifier.fillMaxWidth().height(size.spacing.spacing4))
+
+        SearchInputField(
             value = uiState.searchQuery,
-            onValueChange = viewModel::onSearchQueryChanged
+            modifier= Modifier.padding(horizontal = size.spacing.spacing4),
+            onValueChange = viewModel::onSearchQueryChanged,
+            placeholder = stringResource(com.omniful.app.R.string.search_movies)
         )
+
+        Spacer(modifier = Modifier.fillMaxWidth().height(size.spacing.spacing1))
 
         LazyVerticalGrid(
             state = gridState,
@@ -47,7 +58,9 @@ fun MovieListScreen(
             modifier =Modifier
                 .fillMaxWidth()
                 .weight(1f),
-            contentPadding = PaddingValues(size.spacing.spacing4),
+            contentPadding = PaddingValues(start = size.spacing.spacing4,
+                end = size.spacing.spacing4,top= size.spacing.spacing3, bottom = size.spacing.spacing4
+                ),
             horizontalArrangement = Arrangement.spacedBy(size.spacing.spacing4),
             verticalArrangement = Arrangement.spacedBy(size.spacing.spacing4)
         ) {
@@ -61,7 +74,6 @@ fun MovieListScreen(
                 }
             }
 
-            // -------- Paging States --------
             movies.apply {
 
                 when {
@@ -88,7 +100,7 @@ fun MovieListScreen(
 
                     itemCount == 0 && loadState.refresh is LoadState.NotLoading -> {
                         item(span = { GridItemSpan(2) }) {
-                            EmptyState()
+                            EmptyState(modifier = Modifier.fillMaxWidth())
                         }
                     }
                 }

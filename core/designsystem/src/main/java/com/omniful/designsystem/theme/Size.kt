@@ -29,6 +29,8 @@ interface OMFSpacing {
     val spacing6: Dp
     val spacing7: Dp
     val spacing8: Dp
+
+    val spacingInputFiled: Dp
 }
 
 object DefaultCornerRadius : OMFCornerRadius {
@@ -58,6 +60,9 @@ object DefaultSpacing : OMFSpacing {
     override val spacing6 = 24.dp
     override val spacing7 = 28.dp
     override val spacing8 = 32.dp
+    override val spacingInputFiled: Dp
+        get() = 56.dp
+
 }
 
 interface OMFSize {

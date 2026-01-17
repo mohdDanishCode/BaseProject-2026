@@ -1,6 +1,9 @@
 package com.omniful.app.routes
 
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -15,11 +18,12 @@ sealed class ScreenRoute(val route: String) {
 }
 
 @Composable
-fun NavGraph(navController: NavHostController) {
+fun NavGraph(navController: NavHostController, padding: PaddingValues) {
 
     val appNavigator = LocalAppNavigator.current
 
     NavHost(
+        modifier = Modifier.padding(padding),
         navController = navController,
         startDestination = ScreenRoute.MovieHome.route
     ) {
@@ -45,6 +49,7 @@ fun NavGraph(navController: NavHostController) {
                 val viewModel: MovieDetailViewModel = hiltViewModel()
                 viewModel.loadMovie(movieId)
                 MovieDetailScreen(
+                    movieId = it,
                     viewModel = hiltViewModel(),
                     onBackClick = { navController.popBackStack() }
                 )
