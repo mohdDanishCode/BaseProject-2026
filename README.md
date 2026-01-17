@@ -51,6 +51,8 @@ The app follows **Clean Architecture** with a **multi-module setup**:
 
 ### Data Flow
 
+Remote API → Local Database → UI
+
 > UI observes data **only from the database**, ensuring full offline support.
 
 ---
