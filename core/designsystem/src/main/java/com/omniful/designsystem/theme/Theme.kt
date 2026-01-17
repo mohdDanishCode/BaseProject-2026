@@ -66,7 +66,9 @@ fun OmnifulTheme(
 ) {
 
     val colors = if (darkTheme) DarkColors() else LightColors()
-    val typography = if (darkTheme) DarkTypography() else LightTypography()
+//    val typography = if (darkTheme) DarkTypography() else LightTypography()
+    val typography =  LightTypography()
+
 
     val configuredColorState = ThemeManager.customColors.value ?: colors
 
