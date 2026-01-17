@@ -4,11 +4,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.omniful.app.presentation.notes.usecase.NotesUseCases
 import com.omniful.data.model.movies.MovieUiModel
 import com.omniful.data.repository.movies.MovieRepository
 import com.omniful.data.repository.movies.MovieRepositoryImpl
-import com.omniful.database.model.NoteEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -50,6 +48,7 @@ class MovieListViewModel@Inject constructor(
                 }
             }
             .cachedIn(viewModelScope)
+
 
     fun onSearchQueryChanged(query: String) {
         _searchQuery.value = query

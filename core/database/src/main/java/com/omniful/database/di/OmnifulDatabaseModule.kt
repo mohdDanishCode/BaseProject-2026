@@ -4,8 +4,6 @@ import android.content.Context
 import androidx.room.Room
 import com.omniful.database.OmnifulDatabase
 import com.omniful.database.dao.MovieDao
-import com.omniful.database.dao.NoteDao
-import com.omniful.database.dao.UserDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -26,16 +24,6 @@ object OmnifulDatabaseModule {
             OmnifulDatabase::class.java,
             "omniful_database"
         ).build()
-    }
-
-    @Provides
-    fun provideUserDao(database: OmnifulDatabase): UserDao {
-        return database.userDao()
-    }
-
-    @Provides
-    fun provideNotesDao(database: OmnifulDatabase): NoteDao {
-        return database.getNoteDao()
     }
 
     @Provides

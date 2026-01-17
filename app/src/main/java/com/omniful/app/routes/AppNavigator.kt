@@ -28,19 +28,6 @@ class AppNavigator(
 
 
 
-    init {
-
-
-
-
-
-    }
-
-    fun getNextDestination():ScreenRoute{
-        return ScreenRoute.Login
-    }
-
-
 
     fun getNavController() = navController
 

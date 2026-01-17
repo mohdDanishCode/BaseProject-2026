@@ -99,7 +99,6 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             OmnifulTheme  {
-                val colors = LocalOMFColors.current
 
                 val navController = rememberNavController()
                 appNavigator = AppNavigator(navController,this)
@@ -113,11 +112,5 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
+
 
