@@ -6,6 +6,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.map
 import com.omniful.data.adapters.toUiModel
+import com.omniful.data.errors.MovieError
 import com.omniful.data.model.movies.MovieUiModel
 import com.omniful.database.OmnifulDatabase
 import com.omniful.database.dao.MovieDao
@@ -59,7 +60,19 @@ class MovieRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getMovieById(id: Long): MovieUiModel? {
-        return dao.getMovieById(id)?.toUiModel()
+    override suspend fun getMovieById(
+        id: Long
+    ): com.omniful.data.errors.Result<MovieUiModel, MovieError> {
+        return try {
+            val entity = dao.getMovieById(id)
+
+            if (entity != null) {
+                com.omniful.data.errors.Result.Success(entity.toUiModel())
+            } else {
+                com.omniful.data.errors.Result.Failure(MovieError.NotFound)
+            }
+        } catch (e: Exception) {
+            com.omniful.data.errors.Result.Failure(MovieError.Database)
+        }
     }
 }
