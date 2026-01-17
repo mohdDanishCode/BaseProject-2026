@@ -6,9 +6,7 @@ A modern Android application built with **Kotlin** and **Jetpack Compose** that 
 
 ## 📹 App Demo
 
-(Add your demo video link here)
-
-https://github.com/user-attachments/assets/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
+https://drive.google.com/file/d/1QK7EQMSbYLIKlHALfJNc8GiDKbBPm85N/view?usp=sharing
 
 ---
 
