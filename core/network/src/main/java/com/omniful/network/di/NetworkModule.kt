@@ -98,6 +98,7 @@ internal object NetworkModule {
                 GifDecoder.Factory()
             })
         }
+
         .apply {
 //            if (BuildConfig.DEBUG) {
 //                logger(DebugLogger())
